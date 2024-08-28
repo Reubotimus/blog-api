@@ -35,7 +35,6 @@ model Comment {
 }
 
 model Admin {
-  userId Int 
+  userId Int @id
   admin User @relation(fields: [userId], references: [id])
-  @@id([userId])
 }
