@@ -20,8 +20,10 @@ async function signIn(req, res) {
 }
 
 async function authenticate(req, res, next) {
+    console.log('authenticating');
     if (req.path === '/sign-in' || req.path === '/sign-up') {return next()}
     const bearerHeader = req.headers['authorization'];
+    let data;
     try {
         if(!bearerHeader) {
             throw new Error("Auth token not given");
@@ -33,15 +35,25 @@ async function authenticate(req, res, next) {
             if(err) {
                 throw new Error("invalid token")
             }
-            req.user = prisma.user.findUnique({where: {username: authData.username}})
-            if (!req.user) {
-                throw new Error("invalid username in token")
-            }
-            next()
+            data = authData
         });
+        req.user = await prisma.user.findUnique({where: {username: data["username"]}});
+        if (!req.user) {
+            throw new Error("invalid username in token")
+        }
+        console.log('valid user')
+        return next()
     } catch(err) {
-        return res.status(401).json({ message: "Auth Failed" })
+        return res.status(401).json({ message: err.message, data })
     }
+}
+
+async function isAdmin(req, res, next) {
+    console.log('checking if admit');
+    const admin = await prisma.admin.findUnique({where: {userId: req.user.id}});
+    if (!admin) return res.status(403).json({message: "requires admin status"});
+    console.log('user is admin')
+    next();
 }
 
 async function postEndpoint(req, res, next) {
@@ -78,4 +90,4 @@ const signUp = [
     postEndpoint
 ]
 
-module.exports = {signIn, signUp, authenticate}
+module.exports = {signIn, signUp, authenticate, isAdmin}

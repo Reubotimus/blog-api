@@ -1,0 +1,1 @@
+curl -v -i -X GET -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJldWJlbmNvb2siLCJpYXQiOjE3MjQ5MjI0MjcsImV4cCI6MTcyNTAwODgyN30.DJ5WXwgctS37w_cIbI5zcvLkDqNx8aaMB2yt5un-VQU" http://localhost:3000/api/posts

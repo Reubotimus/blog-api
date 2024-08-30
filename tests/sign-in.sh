@@ -1,0 +1,1 @@
+curl --data "username=reubencook&password=Sci3nce123" -v -i http://localhost:3000/api/sign-in
