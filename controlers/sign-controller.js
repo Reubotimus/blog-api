@@ -67,6 +67,7 @@ async function postEndpoint(req, res, next) {
                         username: req.body.username,
                         password: hashedPassword,
                     }})
+                return res.status(200).json({message: "success"});
             } catch (err) {
                 return res.status(500)
             }});
