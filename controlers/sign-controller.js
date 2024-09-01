@@ -20,8 +20,8 @@ async function signIn(req, res) {
 }
 
 async function authenticate(req, res, next) {
-    console.log('authenticating');
     if (req.path === '/sign-in' || req.path === '/sign-up') {return next()}
+    console.log('authenticating');
     const bearerHeader = req.headers['authorization'];
     let data;
     try {
@@ -57,6 +57,7 @@ async function isAdmin(req, res, next) {
 }
 
 async function postEndpoint(req, res, next) {
+    console.log("signing up")
     const errors = validationResult(req)
     if (errors.isEmpty()) {
         bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
