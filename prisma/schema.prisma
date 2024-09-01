@@ -15,7 +15,9 @@ datasource db {
 
 model Post {
   id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
   title String @unique
+  Comment Comment[]
 }
 
 model User {
@@ -29,8 +31,11 @@ model User {
 
 model Comment {
   id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
   contents String
   userId Int
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
   commenter User @relation(fields: [userId], references: [id])
 }
 

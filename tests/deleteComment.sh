@@ -1,0 +1,1 @@
+curl -v -i -X DELETE -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJldWJlbmNvb2siLCJpYXQiOjE3MjUxNTQ2OTcsImV4cCI6MTcyNTI0MTA5N30.IVPpGrKxYPhUfZVZefHAB-bFOr_SzEBRPkUetr23wG8" http://localhost:3000/api/posts/4/comments/1
