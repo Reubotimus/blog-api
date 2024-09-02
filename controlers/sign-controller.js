@@ -20,7 +20,6 @@ async function signIn(req, res) {
 }
 
 async function authenticate(req, res, next) {
-    if (req.path === '/sign-in' || req.path === '/sign-up') {return next()}
     console.log('authenticating');
     const bearerHeader = req.headers['authorization'];
     let data;
