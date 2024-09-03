@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require("express-validator");
 
 async function signIn(req, res) {
+    console.log('singing in')
+    console.log(req.body)
     let { username, password } = req.body;
     let user = await prisma.user.findUnique({where: { username }});
     if (!user || !(await bcrypt.compare(password, user.password))) {
