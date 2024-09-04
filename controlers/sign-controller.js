@@ -11,6 +11,7 @@ async function signIn(req, res) {
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ message: "Auth Failed" })
     }
+    console.log('valid')
     
     //token expires in 2min
     const token = jwt.sign({ username }, process.env.SECRET, {expiresIn: '1d'});
